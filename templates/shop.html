@@ -1,0 +1,472 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Shop | KGNbazaar</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        .my-links a:hover{
+            border-bottom: 2px solid red!important;
+
+        }
+        
+        .myHeart a{
+            visibility: visible!important;
+            color:black!important;
+        }
+        .myHeart a:hover{
+            visibility: visible;
+            color:red!important;
+        }
+
+        
+        .badge {
+            padding-left: 9px;
+            padding-right: 9px;
+            -webkit-border-radius: 9px;
+            -moz-border-radius: 9px;
+            border-radius: 9px;
+            }
+
+        .label-warning[href],
+        .badge-warning[href] {
+            background-color: #c67605;
+        }
+        #cartcount {
+            font-size: 15px;
+            background: #fff;
+            color: #ff0000;
+            padding: 0 0px;
+            vertical-align: top;
+            margin-left: -10px; 
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <!--? Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{% static 'img/logo/logo.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+        <!-- Header Start -->
+        <div class="header-area">
+            <div class="main-header header-sticky">
+                <div class="container-fluid">
+                    <div class="menu-wrapper">
+                        <!-- Logo -->
+                        <div class="logo">
+                            <a href="index.html"><img src="{% static 'img/logo/logo.png' %}" alt=""></a>
+                        </div>
+                        <!-- Main-menu -->
+                        <div class="main-menu d-none d-lg-block">
+                            <nav>
+                                <ul id="navigation">
+                                    <li><a href="{% url 'Store:index' %}">Home</a></li>
+                                    <li><a href="{% url 'Store:shop' %}">shop</a></li>
+                                    
+                                    <li class="hot"><a href="#">Latest</a>
+                                        <ul class="submenu">
+                                            <li><a href="{% url 'Store:shop' %}"> Product list</a></li>
+                                            <li><a href="{% url 'Store:product_details' %}"> Product Details</a></li>
+                                        </ul>
+                                    </li>
+                                   <li><a href="{% url 'Store:blog' %}">Blog</a></li>
+                                    
+                                    {% if user.is_authenticated %}
+                                    <li><a href='{% url "useraccount:profile" %}'>Profile</a></li>
+                                    {% endif %}
+                                    <li>
+                                        {% if user.is_authenticated %}
+                                            <a href="{% url 'useraccount:logout' %}">Logout</a>
+                                        {% else %}
+                                            <a href="{% url 'useraccount:login' %}">Login</a>
+                                        {% endif %}
+                                    </li>
+                                    <li><a href="{% url 'Store:about' %}">about</a></li>
+                                    <li><a href="{% url 'Store:contact' %}">Contact</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- Header Right -->
+                        <div class="header-right">
+                            <ul>
+                                <li>
+                                    <div class="nav-search search-switch">
+                                        <span class="flaticon-search"></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    {% if user.is_authenticated %}
+                                    <a href="{% url 'useraccount:logout' %}"><span class="flaticon-user"></span></a>
+                                    {% else %}
+                                    <a href="{% url 'useraccount:login' %}"><span class="flaticon-user"></span></a>
+                                    {% endif %}
+                                </li>
+                                <li>
+                                    <a href="{% url 'Store:checkout' %}">
+                                      <span class="flaticon-shopping-cart" id="popcart" data-container="body" data-toggle="popover" sanitize='false' data-html="true" data-placement="bottom" data-content="rutrum faucibus." style='max-width:100%'><span id="cartcount">0</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Mobile Menu -->
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+    <main>
+    
+            <div class="container" style="height:auto!important;">
+                <div class="row product-btn justify-content-between mb-40" style="height: auto!important;">
+                    <div class="properties__button">
+                        <!--Nav Button  -->
+                        <nav>
+                            <div class="nav nav-tabs my-links" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link" href="{% url 'Store:NewestArrivals' %}">NewestArrivals</a>
+                                <a class="nav-item nav-link" href="{% url 'Store:PriceHighToLow' %}"> Price high to low</a>
+                                <a class="nav-item nav-link" href="{% url 'Store:MostPopular' %}"> Most populer </a>
+                            </div>
+                        </nav>
+                        <!--End Nav Button  -->
+                    </div>
+                    <!-- Grid and List view -->
+                    <!-- Select items -->
+                    <form action="{% url 'Store:SelectCurrency' %}" method="get" name="CurrencyForm">
+                        <select name="currency" onChange="CurrencyForm.submit();">
+                            <option value="₹">₹</option>
+                            <option value="$">$</option>
+                            <option value="€">€</option>
+                        </select>
+                        <!-- <input type="submit" value="select"> -->
+                    </form>
+                </div>
+                <!-- Nav Card -->
+                <div class="tab-content" id="nav-tabContent">
+                    <!-- card one -->
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="row">
+                            {% for product in products %}
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-popular-items mb-50 text-center">
+                                    <div class="popular-img" style="border-bottom: none;">
+                                        <img src="{{ product.product_image.url }}" alt="">
+                                        
+                                            <span id="divpr{{ product.product_id }}" class="divpr">
+                                                <button class="btn btn-danger cart" id="pr{{ product.product_id }}">Add to cart</button>
+                                            </span>
+                                        
+                                        <div class="favorit-items myHeart" style="cursor: pointer;">
+                                            <a href="{% url 'Store:FavoriteItem' product.product_id %}"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="popular-caption">
+                                        <h3><a href="product_details.html" id="namepr{{ product.product_id }}">{{ product.product_name }}</a></h3>
+                                        <span id="currencypr{{product.product_id}}">{{ product.currency }}</span>
+                                        <span id="pricepr{{ product.product_id }}">{{ product.price }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!-- Card three -->
+    
+        <!-- Latest Products End -->
+        <!--? Shop Method Start-->
+        <div class="shop-method-area">
+            <div class="container">
+                <div class="method-wrapper">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-xl-4 col-lg-4 col-md-6">
+                            <div class="single-method mb-40">
+                                <i class="ti-package"></i>
+                                <h6>Free Shipping Method</h6>
+                                <p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6">
+                            <div class="single-method mb-40">
+                                <i class="ti-unlock"></i>
+                                <h6>Secure Payment System</h6>
+                                <p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6">
+                            <div class="single-method mb-40">
+                                <i class="ti-reload"></i>
+                                <h6>Secure Payment System</h6>
+                                <p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shop Method End-->
+    </main>
+    <footer>
+        <!-- Footer Start-->
+        <div class="footer-area footer-padding">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                        <div class="single-footer-caption mb-50">
+                            <div class="single-footer-caption mb-30">
+                                <!-- logo -->
+                                <div class="footer-logo">
+                                    <a href="index.html"><img src="{% static 'img/logo/logo2_footer.png' %}" alt=""></a>
+                                </div>
+                                <div class="footer-tittle">
+                                    <div class="footer-pera">
+                                        <p>Asorem ipsum adipolor sdit amet, consectetur adipisicing elitcf sed do eiusmod tem.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Quick Links</h4>
+                                <ul>
+                                    <li><a href="#">About</a></li>
+                                    <li><a href="#"> Offers & Discounts</a></li>
+                                    <li><a href="#"> Get Coupon</a></li>
+                                    <li><a href="#"> Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>New Products</h4>
+                                <ul>
+                                    <li><a href="#">Woman Cloth</a></li>
+                                    <li><a href="#">Fashion Accessories</a></li>
+                                    <li><a href="#"> Man Accessories</a></li>
+                                    <li><a href="#"> Rubber made Toys</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Support</h4>
+                                <ul>
+                                    <li><a href="#">Frequently Asked Questions</a></li>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Report a Payment Issue</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer bottom -->
+                <div class="row align-items-center">
+                    <div class="col-xl-7 col-lg-8 col-md-7">
+                        <div class="footer-copy-right">
+                            <p>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-4 col-md-5">
+                        <div class="footer-copy-right f-right">
+                            <!-- social -->
+                            <div class="footer-social">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.instagram.com/_prafull_patidar_/"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fas fa-globe"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer>
+    <!--? Search model Begin -->
+    <div class="search-model-box">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-btn">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Searching key.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+    <!-- JS here -->
+    <!-- All JS Custom Plugins Link Here here -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/animated.headline.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery.sticky.js' %}"></script>
+    <!-- contact js -->
+    <script src="{% static 'js/contact.js' %}"></script>
+    <script src="{% static 'js/jquery.form.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/mail-script.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript">
+    if (localStorage.getItem('cart') == null) {
+    var cart = {};
+} else {
+
+    cart = JSON.parse(localStorage.getItem('cart'));
+    // document.getElementById('cartcount').innerHTML = Object.keys(cart).length; updatecart method will set this cart
+    updatecart(cart)
+
+}
+
+// function which set cart after clicked on 'add to cart button'
+
+// $('.cart').click(function() {
+$('.divpr').on('click', 'button.cart', function() {
+    var idstr = this.id.toString();
+
+    if (cart[idstr] != undefined) {
+        qty = cart[idstr][0] + 1;
+    } else {
+        qty = 1;
+        name = document.getElementById('name' + idstr).innerHTML;
+        amount = document.getElementById('price'+idstr).innerHTML;
+        currency = document.getElementById('currency'+idstr).innerHTML;
+        cart[idstr] = [qty, name, currency, amount];
+    }
+    updatecart(cart) // method which update cart and will show increment(+) and decrement(-) buttons
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cartcount').innerHTML = Object.keys(cart).length;
+
+});
+
+// method update cart
+
+function updatecart(cart) {
+    sum = 0
+    for (var item in cart) {
+        sum = sum + cart[item][0];
+        document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-danger minus' style='font-size:45px;'> - </button> <span id='val" + item + "' style='padding:5px; font-size:20px;'><b>" + cart[item][0] + "</b></span> <button id='plus" + item + "' class='btn btn-danger plus' style='font-size:45px;'> + </button>";
+    }
+    localStorage.setItem('cart', JSON.stringify(cart)); //again set cart to local storage which will saved even after page refres
+    document.getElementById('cartcount').innerHTML = sum; // it will set icon cart value corresponds to quantity
+    updatepopover(cart); //method/function which set name and quantity of product in popover
+}
+
+// click on minus/decrement button
+$('.divpr').on("click", "button.minus", function() {
+    a = this.id.slice(7, );
+    cart['pr' + a][0] = cart['pr' + a][0] - 1;
+    cart['pr' + a][0] = Math.max(0, cart['pr' + a][0]); // Math.max will save decrement button to go less than zero
+    if(cart['pr'+a][0] == 0){
+        document.getElementById('divpr'+a).innerHTML = `<button class="btn btn-danger cart" id="pr${a}">Add to cart</button>`;
+        delete cart['pr'+a];
+    }
+    else{
+        document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+    }
+    updatecart(cart); //update cart again
+});
+
+//click  on plus/increment button
+$('.divpr').on("click", "button.plus", function() {
+    a = this.id.slice(6, );
+    cart['pr' + a][0] = cart['pr' + a][0] + 1;
+    document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+    updatecart(cart);
+});
+
+$('#popcart').popover();
+$("[data-toggle=popover]").popover(); //bootstap method to initialize popover
+
+//function which used to update popover
+function updatepopover(cart) {
+    var popstr = "";
+    popstr = popstr + "<h5>Items in your cart.</h5><div>";
+    var i = 1;
+    for (var item in cart) {
+        popstr = popstr + "<b>" + i + "</b>. ";
+        popstr = popstr + document.getElementById('name' + item).innerHTML.slice(0, 18)+ "..<b> Qty: </b>" + cart[item][0] + ' Amount :' + document.getElementById('currency'+item).innerHTML + document.getElementById('price'+item).innerHTML * cart[item][0]  + "<br>"; //slice is used to show only 0 to 18 characters it is optional
+        i = i + 1;
+    }
+    popstr = popstr + '</div><a href="{% url "Store:checkout" %}"><button class="btn btn-sm btn-ddanger px-2 py-4" id="checkout" style="font-size:15px;">Checkout</button></a><button id="clearcart" onclick="clearcart()" class="btn btn-danger px-2 py-4 mx-2" style="font-size:15px;">Clear Cart</button>'; //adding two buttons checkout and clear cart
+
+    document.getElementById('popcart').setAttribute('data-content', popstr) //set attribut will set popover content(data-content) to popstr
+    $('#popcart').popover('show'); //bootstrap method which takes option 'show' which will show popstr in popover
+}
+
+// clear cart function will clear all itesm from cart and will set it to zero
+
+function clearcart() {
+    console.log(cart)
+    cart = JSON.parse(localStorage.getItem('cart'))
+    for (var item in cart) {
+        document.getElementById('div' + item).innerHTML = "<button class='btn btn-danger cart' id='" + item + "'>Add to cart</button>";
+    }
+    localStorage.clear();
+    cart = {};
+    updatecart(cart);
+}
+    </script>
+</body>
+
+</html>

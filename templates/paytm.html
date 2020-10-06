@@ -1,0 +1,21 @@
+<html>
+   <head>
+      <title>Paytm merchent payment page</title>
+   </head>
+   <body>
+      <center>
+         <h1>Redirecting you to merchent</h1>
+         <h1>Please do not refresh this page...</h1>
+      </center>
+      <form method="post" action="https://securegw-stage.paytm.in/theia/api/v1/showPaymentPage?mid={{mid}}&orderId={{orderid}}" name="paytm">
+         <table border="1">
+            <tbody>
+               {% for key,value in param_dict.items %}
+               <input type="hidden" name="{{key}}" value="{{value}}">
+               {% endfor %}
+            </tbody>
+         </table>
+         <script type="text/javascript"> document.paytm.submit(); </script>
+      </form>
+   </body>
+</html>
