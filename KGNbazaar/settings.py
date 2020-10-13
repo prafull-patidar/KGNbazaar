@@ -163,7 +163,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'prafull0099@gmail.com'
-EMAIL_HOST_PASSWORD = 'gymfreakme@7878'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 PASSWORD_RESET_TIMEOUT_DAYS = 1
